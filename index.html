@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>She Gorgeous | Luxury Makeup Studio & Academy</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="She Gorgeous is a premium makeup studio and academy in Bhayander West, Thane. Specializing in bridal, party, and professional makeup services and training.">
+    <meta name="keywords" content="makeup studio bhayander, makeup academy thane, bridal makeup bhayander, professional makeup training, she gorgeous makeup">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- GSAP for Premium Animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#EC4899',
+                        'on-primary': '#FFFFFF',
+                        secondary: '#F9A8D4',
+                        accent: '#8B5CF6',
+                        background: '#FDF2F8',
+                        foreground: '#831843',
+                        muted: '#F1EEF5',
+                        border: '#FBCFE8',
+                    },
+                    fontFamily: {
+                        heading: ['Playfair Display', 'serif'],
+                        body: ['Inter', 'sans-serif'],
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'morph': 'morph 8s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        morph: {
+                            '0%, 100%': { borderRadius: '60% 40% 30% 70% / 60% 30% 70% 40%' },
+                            '50%': { borderRadius: '30% 60% 70% 40% / 50% 60% 30% 60%' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        :root {
+            --glass-bg: rgba(255, 255, 255, 0.7);
+            --glass-border: rgba(255, 255, 255, 0.3);
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FDF2F8;
+            color: #831843;
+            overflow-x: hidden;
+        }
+        
+        .font-heading { font-family: 'Playfair Display', serif; }
+        
+        .liquid-glass {
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 8px 32px 0 rgba(236, 72, 153, 0.1);
+        }
+        
+        .hero-gradient {
+            background: radial-gradient(circle at top right, #FDF2F8, #FCE7F3, #FBCFE8);
+        }
+        
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #FDF2F8; }
+        ::-webkit-scrollbar-thumb {
+            background: #EC4899;
+            border-radius: 10px;
+        }
+        
+        .morphing-blob {
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: linear-gradient(45deg, #F9A8D4, #EC4899);
+            filter: blur(80px);
+            opacity: 0.2;
+            z-index: -1;
+            animation: morph 10s ease-in-out infinite;
+        }
+        
+        .nav-link {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #EC4899;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after { width: 100%; }
+        
+        .btn-premium {
+            background: linear-gradient(135deg, #EC4899, #8B5CF6);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 20px -10px rgba(236, 72, 153, 0.5);
+        }
+        
+        .btn-premium:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 15px 30px -12px rgba(236, 72, 153, 0.6);
+        }
+    </style>
+</head>
+<body class="selection:bg-primary selection:text-white">
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-[100] transition-all duration-500 py-6" id="main-nav">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12">
+            <div class="liquid-glass rounded-full px-8 py-4 flex justify-between items-center">
+                <a href="#" class="font-heading text-2xl font-bold tracking-tight text-foreground">
+                    She Gorgeous<span class="text-primary">.</span>
+                </a>
+                
+                <div class="hidden md:flex space-x-10 items-center">
+                    <a href="#about" class="nav-link font-medium text-foreground/80 hover:text-primary">About</a>
+                    <a href="#services" class="nav-link font-medium text-foreground/80 hover:text-primary">Services</a>
+                    <a href="#academy" class="nav-link font-medium text-foreground/80 hover:text-primary">Academy</a>
+                    <a href="#contact" class="nav-link font-medium text-foreground/80 hover:text-primary">Contact</a>
+                    <a href="https://wa.me/919167113178" target="_blank" class="btn-premium text-white px-8 py-2.5 rounded-full font-semibold text-sm flex items-center gap-2">
+                        <i data-lucide="message-circle" class="w-4 h-4"></i> Book Now
+                    </a>
+                </div>
+                
+                <button class="md:hidden text-foreground" id="mobile-menu-btn">
+                    <i data-lucide="menu" class="w-6 h-6"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden absolute top-24 left-6 right-6 liquid-glass rounded-3xl p-8 flex flex-col space-y-6 text-center md:hidden animate-fade-in">
+            <a href="#about" class="text-lg font-medium py-2">About</a>
+            <a href="#services" class="text-lg font-medium py-2">Services</a>
+            <a href="#academy" class="text-lg font-medium py-2">Academy</a>
+            <a href="#contact" class="text-lg font-medium py-2">Contact</a>
+            <a href="https://wa.me/919167113178" target="_blank" class="btn-premium text-white px-8 py-4 rounded-full font-semibold flex justify-center items-center gap-2">
+                <i data-lucide="message-circle" class="w-5 h-5"></i> WhatsApp Us
+            </a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative min-h-screen flex items-center pt-20 overflow-hidden hero-gradient">
+        <div class="morphing-blob -top-20 -left-20"></div>
+        <div class="morphing-blob bottom-0 right-0" style="animation-delay: -5s; background: linear-gradient(45deg, #8B5CF6, #F9A8D4);"></div>
+        
+        <div class="max-w-7xl mx-auto px-6 lg:px-12 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center relative z-10">
+            <div class="reveal active" id="hero-text">
+                <span class="inline-block px-4 py-1.5 rounded-full bg-primary/10 text-primary text-xs font-bold tracking-widest uppercase mb-6">Premium Studio & Academy</span>
+                <h1 class="font-heading text-6xl md:text-8xl font-bold leading-tight mb-8">
+                    Elevate Your <br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">Radiance.</span>
+                </h1>
+                <p class="text-lg md:text-xl text-foreground/70 mb-10 max-w-lg leading-relaxed">
+                    Discover professional artistry tailored to your unique beauty. From high-fashion bridal looks to career-defining training at our Bhayander studio.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-5">
+                    <a href="https://wa.me/919167113178" target="_blank" class="btn-premium text-white px-10 py-5 rounded-full font-bold text-lg flex items-center justify-center gap-3">
+                        <i data-lucide="calendar" class="w-5 h-5"></i> Reserve Session
+                    </a>
+                    <a href="#services" class="liquid-glass text-foreground px-10 py-5 rounded-full font-bold text-lg flex items-center justify-center border-white/50">
+                        Our Portfolio
+                    </a>
+                </div>
+                
+                <div class="mt-12 flex items-center gap-8 text-sm font-medium text-foreground/60">
+                    <div class="flex items-center gap-2">
+                        <i data-lucide="star" class="w-4 h-4 text-primary fill-primary"></i>
+                        <span>5.0 Excellence</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <i data-lucide="award" class="w-4 h-4 text-accent fill-accent"></i>
+                        <span>Certified Academy</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="relative reveal active lg:block hidden" id="hero-image">
+                <div class="absolute -inset-4 bg-gradient-to-tr from-primary/20 to-accent/20 blur-3xl rounded-[3rem] animate-pulse"></div>
+                <img src="./she_gorgeous_hero_1778062037301.png" alt="Luxury Makeup Studio" class="relative rounded-[2.5rem] shadow-2xl w-full h-[600px] object-cover border-4 border-white/50">
+                <div class="absolute -bottom-10 -left-10 liquid-glass p-6 rounded-3xl shadow-xl animate-float">
+                    <div class="flex gap-4 items-center">
+                        <div class="w-12 h-12 rounded-2xl bg-primary/20 flex items-center justify-center">
+                            <i data-lucide="heart" class="w-6 h-6 text-primary"></i>
+                        </div>
+                        <div>
+                            <p class="text-xs text-foreground/50 font-bold uppercase tracking-wider">Happy Brides</p>
+                            <p class="text-xl font-heading font-bold text-foreground">500+ Transformations</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-32 bg-white relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-20 items-center">
+                <div class="relative reveal">
+                    <img src="./bridal_makeup_featured_1778062057080.png" alt="Bridal Excellence" class="rounded-[3rem] shadow-2xl relative z-10 w-full h-[500px] object-cover">
+                    <div class="absolute -top-10 -right-10 w-40 h-40 bg-accent/10 rounded-full blur-3xl"></div>
+                    <div class="absolute -bottom-10 -left-10 w-60 h-60 bg-primary/10 rounded-full blur-3xl"></div>
+                </div>
+                
+                <div class="reveal">
+                    <h2 class="font-heading text-5xl font-bold mb-8 leading-tight">Artistry That <br> Tells Your Story</h2>
+                    <p class="text-lg text-foreground/70 mb-8 leading-relaxed">
+                        At <strong class="text-primary font-semibold">She Gorgeous</strong>, we believe makeup is not just about enhancement—it's about confidence and celebration. Nestled in the heart of Bhayander West, our studio offers a sanctuary for those seeking world-class beauty services.
+                    </p>
+                    <p class="text-lg text-foreground/70 mb-10 leading-relaxed">
+                        Founded by industry expert Shital Patel, our mission is to deliver flawless, skin-focused results that last through your most precious moments. Whether it's your wedding day or your first steps into the makeup industry, we provide the expertise you deserve.
+                    </p>
+                    
+                    <div class="grid grid-cols-2 gap-8 mb-12">
+                        <div class="p-6 rounded-3xl bg-background border border-border">
+                            <i data-lucide="check-circle-2" class="w-8 h-8 text-primary mb-4"></i>
+                            <h4 class="font-bold mb-2">Luxury Studio</h4>
+                            <p class="text-sm text-foreground/60">Professional, clean, and comfortable environment.</p>
+                        </div>
+                        <div class="p-6 rounded-3xl bg-background border border-border">
+                            <i data-lucide="users" class="w-8 h-8 text-accent mb-4"></i>
+                            <h4 class="font-bold mb-2">Personalized</h4>
+                            <p class="text-sm text-foreground/60">Tailored looks for your skin tone & occasion.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-32 bg-background relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12 text-center mb-20">
+            <h2 class="font-heading text-5xl font-bold mb-6">Our Signature Services</h2>
+            <p class="text-foreground/60 max-w-2xl mx-auto text-lg">Indulge in a range of premium services designed to make you look and feel your absolute best.</p>
+        </div>
+        
+        <div class="max-w-7xl mx-auto px-6 lg:px-12 grid grid-cols-1 md:grid-cols-3 gap-10">
+            <!-- Bridal -->
+            <div class="reveal group h-full">
+                <div class="bg-white rounded-[2.5rem] p-10 shadow-sm border border-border hover:shadow-xl hover:-translate-y-2 transition-all duration-500 h-full flex flex-col">
+                    <div class="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mb-8 group-hover:bg-primary transition-colors duration-500">
+                        <i data-lucide="gem" class="w-8 h-8 text-primary group-hover:text-white transition-colors"></i>
+                    </div>
+                    <h3 class="font-heading text-2xl font-bold mb-4">Bridal Artistry</h3>
+                    <p class="text-foreground/60 leading-relaxed mb-8 flex-grow">
+                        Timeless, radiant looks for weddings, engagements, and receptions. We focus on longevity and photographic perfection.
+                    </p>
+                    <ul class="space-y-3 text-sm font-medium text-foreground/80 mb-8">
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-primary"></i> Traditional & Modern</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-primary"></i> HD & Airbrush Options</li>
+                    </ul>
+                    <a href="https://wa.me/919167113178?text=Enquiry%20for%20Bridal%20Makeup" class="text-primary font-bold flex items-center gap-2 group-hover:gap-4 transition-all">
+                        Learn More <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Party -->
+            <div class="reveal group h-full" style="transition-delay: 0.1s;">
+                <div class="bg-white rounded-[2.5rem] p-10 shadow-sm border border-border hover:shadow-xl hover:-translate-y-2 transition-all duration-500 h-full flex flex-col">
+                    <div class="w-16 h-16 rounded-2xl bg-accent/10 flex items-center justify-center mb-8 group-hover:bg-accent transition-colors duration-500">
+                        <i data-lucide="sparkles" class="w-8 h-8 text-accent group-hover:text-white transition-colors"></i>
+                    </div>
+                    <h3 class="font-heading text-2xl font-bold mb-4">Celebration Glow</h3>
+                    <p class="text-foreground/60 leading-relaxed mb-8 flex-grow">
+                        Stand out at any event. Perfect for birthdays, cocktail parties, photoshoots, and festive gatherings.
+                    </p>
+                    <ul class="space-y-3 text-sm font-medium text-foreground/80 mb-8">
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-accent"></i> Glamorous & Subtle</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-accent"></i> Hair Styling Included</li>
+                    </ul>
+                    <a href="https://wa.me/919167113178?text=Enquiry%20for%20Party%20Makeup" class="text-accent font-bold flex items-center gap-2 group-hover:gap-4 transition-all">
+                        Learn More <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Academy -->
+            <div class="reveal group h-full" style="transition-delay: 0.2s;">
+                <div class="bg-white rounded-[2.5rem] p-10 shadow-sm border border-border hover:shadow-xl hover:-translate-y-2 transition-all duration-500 h-full flex flex-col">
+                    <div class="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mb-8 group-hover:bg-primary transition-colors duration-500">
+                        <i data-lucide="graduation-cap" class="w-8 h-8 text-primary group-hover:text-white transition-colors"></i>
+                    </div>
+                    <h3 class="font-heading text-2xl font-bold mb-4">Masterclass Academy</h3>
+                    <p class="text-foreground/60 leading-relaxed mb-8 flex-grow">
+                        Turn your passion into a career. We offer basic and advanced professional courses with certification.
+                    </p>
+                    <ul class="space-y-3 text-sm font-medium text-foreground/80 mb-8">
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-primary"></i> Hands-on Training</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-primary"></i> Career Guidance</li>
+                    </ul>
+                    <a href="https://wa.me/919167113178?text=Enquiry%20for%20Academy%20Courses" class="text-primary font-bold flex items-center gap-2 group-hover:gap-4 transition-all">
+                        View Courses <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Academy Hero -->
+    <section id="academy" class="py-32 bg-foreground text-white relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10">
+            <img src="./makeup_academy_training_1778062073711.png" alt="Academy Background" class="w-full h-full object-cover">
+        </div>
+        <div class="max-w-7xl mx-auto px-6 lg:px-12 relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+            <div class="reveal">
+                <h2 class="font-heading text-5xl md:text-6xl font-bold mb-8 leading-tight">Master the Art <br> of Beauty</h2>
+                <p class="text-white/70 text-lg mb-10 leading-relaxed">
+                    Join Bhayander's most sought-after makeup academy. Our curriculum is designed by professionals for aspiring artists who want to excel in the competitive beauty industry.
+                </p>
+                <div class="space-y-6 mb-12">
+                    <div class="flex items-start gap-4">
+                        <div class="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center border border-primary/30">
+                            <i data-lucide="check" class="w-5 h-5 text-primary"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-xl">Hands-on Practical Training</h4>
+                            <p class="text-white/50 text-sm">Real models, real tools, real experience.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4">
+                        <div class="w-10 h-10 rounded-full bg-accent/20 flex items-center justify-center border border-accent/30">
+                            <i data-lucide="check" class="w-5 h-5 text-accent"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-xl">Product Knowledge & Theory</h4>
+                            <p class="text-white/50 text-sm">Understanding skin types and high-end brands.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4">
+                        <div class="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center border border-primary/30">
+                            <i data-lucide="check" class="w-5 h-5 text-primary"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-xl">Official Certification</h4>
+                            <p class="text-white/50 text-sm">Build your portfolio with an industry-recognized certificate.</p>
+                        </div>
+                    </div>
+                </div>
+                <a href="https://wa.me/919167113178?text=Enquire%20about%20academy" class="btn-premium text-white px-10 py-5 rounded-full font-bold text-lg inline-block">
+                    Enquire About Enrolment
+                </a>
+            </div>
+            
+            <div class="reveal lg:block hidden">
+                <div class="grid grid-cols-2 gap-4">
+                    <img src="./makeup_academy_training_1778062073711.png" alt="Training 1" class="rounded-[2rem] w-full h-80 object-cover border-2 border-white/10">
+                    <img src="./she_gorgeous_hero_1778062037301.png" alt="Training 2" class="rounded-[2rem] w-full h-64 object-cover mt-16 border-2 border-white/10">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact & Location -->
+    <section id="contact" class="py-32 bg-white">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12">
+            <div class="text-center mb-20">
+                <h2 class="font-heading text-5xl font-bold mb-6">Connect With Us</h2>
+                <p class="text-foreground/60 max-w-2xl mx-auto text-lg">Have questions? We're here to help. Reach out to book your appointment or visit our studio.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Location -->
+                <div class="liquid-glass p-10 rounded-[2.5rem] text-center border-border/50 reveal">
+                    <div class="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-8">
+                        <i data-lucide="map-pin" class="w-8 h-8 text-primary"></i>
+                    </div>
+                    <h4 class="font-heading text-2xl font-bold mb-4">Visit Studio</h4>
+                    <p class="text-foreground/70 leading-relaxed text-sm">
+                        Shop No. 8, Vishal CHS Ltd,<br>
+                        Near Maxus Mall, Bhayander West,<br>
+                        Thane, Maharashtra - 400101
+                    </p>
+                </div>
+                
+                <!-- Contact -->
+                <div class="liquid-glass p-10 rounded-[2.5rem] text-center border-border/50 reveal" style="transition-delay: 0.1s;">
+                    <div class="w-16 h-16 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-8">
+                        <i data-lucide="phone" class="w-8 h-8 text-accent"></i>
+                    </div>
+                    <h4 class="font-heading text-2xl font-bold mb-4">Get In Touch</h4>
+                    <p class="text-foreground/70 mb-8">+91 9167113178</p>
+                    <a href="https://wa.me/919167113178" target="_blank" class="bg-[#25D366] text-white px-8 py-3 rounded-full font-bold inline-flex items-center gap-2 hover:scale-105 transition-transform">
+                        <i data-lucide="message-circle" class="w-5 h-5"></i> WhatsApp
+                    </a>
+                </div>
+                
+                <!-- Email -->
+                <div class="liquid-glass p-10 rounded-[2.5rem] text-center border-border/50 reveal" style="transition-delay: 0.2s;">
+                    <div class="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-8">
+                        <i data-lucide="mail" class="w-8 h-8 text-primary"></i>
+                    </div>
+                    <h4 class="font-heading text-2xl font-bold mb-4">Email Us</h4>
+                    <p class="text-foreground/70 mb-8 text-sm">shitalpatel107@gmail.com</p>
+                    <a href="mailto:shitalpatel107@gmail.com" class="text-primary font-bold hover:underline">Send Message</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-foreground text-white py-20 border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+                <div class="md:col-span-2">
+                    <h3 class="font-heading text-3xl font-bold mb-6">She Gorgeous<span class="text-primary">.</span></h3>
+                    <p class="text-white/50 max-w-sm mb-8 leading-relaxed">
+                        Where luxury meets artistry. We are dedicated to providing the highest quality beauty services and education.
+                    </p>
+                    <div class="flex gap-4">
+                        <a href="https://wa.me/919167113178" class="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center hover:bg-primary transition-colors">
+                            <i data-lucide="message-circle" class="w-5 h-5"></i>
+                        </a>
+                        <a href="mailto:shitalpatel107@gmail.com" class="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center hover:bg-accent transition-colors">
+                            <i data-lucide="mail" class="w-5 h-5"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold mb-6">Navigation</h4>
+                    <ul class="space-y-4 text-white/50">
+                        <li><a href="#home" class="hover:text-primary transition-colors">Home</a></li>
+                        <li><a href="#about" class="hover:text-primary transition-colors">About</a></li>
+                        <li><a href="#services" class="hover:text-primary transition-colors">Services</a></li>
+                        <li><a href="#academy" class="hover:text-primary transition-colors">Academy</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold mb-6">Support</h4>
+                    <ul class="space-y-4 text-white/50">
+                        <li><button class="hover:text-primary transition-colors">Privacy Policy</button></li>
+                        <li><button class="hover:text-primary transition-colors">Terms of Service</button></li>
+                        <li><a href="#contact" class="hover:text-primary transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6 text-sm text-white/30">
+                <p>&copy; 2026 She Gorgeous Makeup Studio & Academy. All Rights Reserved.</p>
+                <p>Designed with <span class="text-primary">♥</span> in Bhayander</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating Contact Button -->
+    <a href="https://wa.me/919167113178" target="_blank" class="fixed bottom-8 right-8 z-[200] w-16 h-16 bg-[#25D366] text-white rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition-all duration-300 animate-bounce">
+        <i data-lucide="message-circle" class="w-8 h-8"></i>
+    </a>
+
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+        
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        // Close mobile menu on scroll or click
+        window.addEventListener('scroll', () => {
+            if (!mobileMenu.classList.contains('hidden')) {
+                mobileMenu.classList.add('hidden');
+            }
+            
+            // Navbar scroll effect
+            const nav = document.getElementById('main-nav');
+            if (window.scrollY > 50) {
+                nav.classList.remove('py-6');
+                nav.classList.add('py-2');
+            } else {
+                nav.classList.add('py-6');
+                nav.classList.remove('py-2');
+            }
+        });
+        
+        // Reveal Animations on Scroll
+        const revealElements = document.querySelectorAll('.reveal');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        revealElements.forEach(el => observer.observe(el));
+        
+        // Smooth scroll for anchors
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // GSAP Animations
+        gsap.registerPlugin(ScrollTrigger);
+
+        gsap.from("#hero-text", {
+            duration: 1.5,
+            x: -100,
+            opacity: 0,
+            ease: "power4.out"
+        });
+
+        gsap.from("#hero-image", {
+            duration: 1.5,
+            x: 100,
+            opacity: 0,
+            ease: "power4.out",
+            delay: 0.2
+        });
+    </script>
+</body>
+</html>
