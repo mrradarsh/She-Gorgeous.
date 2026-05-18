@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>She Gorgeous | Luxury Makeup Studio & Academy</title>
+    <title>She Gorgeous | Luxury Makeup Studio and Academy</title>
 
     <!-- SEO Meta Tags -->
     <meta name="description"
@@ -211,6 +211,478 @@
         .adarsh-badge:hover::before {
             left: 100%;
         }
+
+        /* ══════════════════════════════════
+           SECRET SIGNATURE POPUP (Tab+A)
+        ══════════════════════════════════ */
+        #dev-signature {
+            position: fixed;
+            inset: 0;
+            z-index: 100000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(3, 4, 11, 0.75);
+            backdrop-filter: blur(16px);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease;
+        }
+
+        #dev-signature.dev-visible {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .dev-card {
+            position: relative;
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02));
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 28px;
+            padding: 48px 44px 36px;
+            text-align: center;
+            width: min(420px, 92vw);
+            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.06);
+            transform: scale(0.85) translateY(30px);
+            transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+            overflow: hidden;
+        }
+
+        #dev-signature.dev-visible .dev-card {
+            transform: scale(1) translateY(0);
+        }
+
+        /* Animated glow behind card */
+        .dev-card-glow {
+            position: absolute;
+            inset: -40px;
+            background: radial-gradient(circle at 50% 50%, rgba(168, 85, 247, 0.25), rgba(255, 45, 85, 0.15), transparent 70%);
+            animation: glow-spin 6s linear infinite;
+            z-index: -1;
+            border-radius: 50%;
+        }
+
+        @keyframes glow-spin {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Close button */
+        .dev-close {
+            position: absolute;
+            top: 14px;
+            right: 18px;
+            font-size: 18px;
+            cursor: pointer;
+            color: rgba(255, 255, 255, 0.4);
+            transition: color 0.2s, transform 0.2s;
+            line-height: 1;
+        }
+
+        .dev-close:hover {
+            color: #ff2d55;
+            transform: rotate(90deg);
+        }
+
+        /* Secret badge */
+        .dev-badge {
+            display: inline-block;
+            font-size: 10px;
+            font-weight: 900;
+            letter-spacing: 0.2em;
+            color: #ffd43b;
+            border: 1px solid rgba(255, 212, 59, 0.3);
+            padding: 4px 12px;
+            border-radius: 99px;
+            margin-bottom: 22px;
+            animation: badge-pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes badge-pulse {
+
+            0%,
+            100% {
+                box-shadow: 0 0 0 0 rgba(255, 212, 59, 0.3);
+            }
+
+            50% {
+                box-shadow: 0 0 0 6px rgba(255, 212, 59, 0);
+            }
+        }
+
+        /* Avatar circle */
+        .dev-avatar {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ff2d55, #a855f7, #3b82f6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            font-weight: 900;
+            color: #fff;
+            margin: 0 auto 18px;
+            box-shadow: 0 0 0 4px rgba(168, 85, 247, 0.2), 0 0 30px rgba(168, 85, 247, 0.3);
+            animation: avatar-spin-ring 4s linear infinite;
+        }
+
+        @keyframes avatar-spin-ring {
+
+            0%,
+            100% {
+                box-shadow: 0 0 0 4px rgba(255, 45, 85, 0.3), 0 0 30px rgba(168, 85, 247, 0.3);
+            }
+
+            33% {
+                box-shadow: 0 0 0 4px rgba(168, 85, 247, 0.3), 0 0 30px rgba(59, 130, 246, 0.3);
+            }
+
+            66% {
+                box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.3), 0 0 30px rgba(255, 45, 85, 0.3);
+            }
+        }
+
+        .dev-label {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.45);
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            margin-bottom: 6px;
+        }
+
+        /* Glitch name */
+        .dev-name {
+            font-size: 42px !important;
+            font-weight: 900 !important;
+            background: linear-gradient(90deg, #ff2d55, #ff7a18, #ffd43b, #a855f7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+            display: inline-block;
+            animation: glitch-name 3s ease-in-out infinite;
+            margin: 0 0 6px !important;
+            letter-spacing: -0.02em;
+        }
+
+        .dev-name::before,
+        .dev-name::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            background: linear-gradient(90deg, #ff2d55, #ff7a18, #ffd43b, #a855f7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .dev-name::before {
+            animation: glitch-1 3s ease-in-out infinite;
+            clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
+        }
+
+        .dev-name::after {
+            animation: glitch-2 3s ease-in-out infinite;
+            clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%);
+        }
+
+        @keyframes glitch-1 {
+
+            0%,
+            90%,
+            100% {
+                transform: translate(0);
+                opacity: 0;
+            }
+
+            92% {
+                transform: translate(-3px, 1px);
+                opacity: 0.7;
+            }
+
+            94% {
+                transform: translate(3px, -1px);
+                opacity: 0.7;
+            }
+
+            96% {
+                transform: translate(0);
+                opacity: 0;
+            }
+        }
+
+        @keyframes glitch-2 {
+
+            0%,
+            90%,
+            100% {
+                transform: translate(0);
+                opacity: 0;
+            }
+
+            93% {
+                transform: translate(3px, 2px);
+                opacity: 0.6;
+            }
+
+            95% {
+                transform: translate(-3px, -2px);
+                opacity: 0.6;
+            }
+
+            97% {
+                transform: translate(0);
+                opacity: 0;
+            }
+        }
+
+        .dev-tagline {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.4);
+            font-style: italic;
+            margin-bottom: 22px;
+        }
+
+        .dev-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.12), transparent);
+            margin: 0 0 20px;
+        }
+
+        /* Tech stack chips */
+        .dev-stack {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .dev-stack span {
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 0.05em;
+            padding: 4px 12px;
+            border-radius: 99px;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.7);
+            transition: background 0.3s, color 0.3s;
+        }
+
+        .dev-stack span:hover {
+            background: rgba(255, 45, 85, 0.15);
+            color: #ff2d55;
+            border-color: #ff2d55;
+        }
+
+        .dev-hint {
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.2);
+            margin: 0;
+        }
+
+        .dev-hint kbd {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 4px;
+            padding: 1px 6px;
+            font-size: 10px;
+            font-family: monospace;
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        /* Confetti burst dots */
+        .dev-burst-dot {
+            position: fixed;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 100001;
+            animation: burst-fly 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+            transform: translate(-50%, -50%);
+        }
+
+        @keyframes burst-fly {
+            0% {
+                transform: translate(-50%, -50%) translate(0, 0) scale(1);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translate(-50%, -50%) translate(var(--tx), var(--ty)) scale(0);
+                opacity: 0;
+            }
+        }
+
+        /* ══════════════════════════════════
+           DEVTOOLS DETECTION BLOCKED SCREEN
+        ══════════════════════════════════ */
+        #devtools-blocker {
+            position: fixed;
+            inset: 0;
+            z-index: 200000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(15, 6, 12, 0.85);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        #devtools-blocker.blocker-visible {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .blocker-card {
+            position: relative;
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03));
+            border: 1px solid rgba(236, 72, 153, 0.3);
+            border-radius: 32px;
+            padding: 48px 40px;
+            text-align: center;
+            width: min(480px, 92vw);
+            box-shadow: 0 40px 100px rgba(236, 72, 153, 0.15), 0 0 0 1px rgba(255, 255, 255, 0.05);
+            transform: scale(0.9) translateY(40px);
+            transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+            overflow: hidden;
+        }
+
+        #devtools-blocker.blocker-visible .blocker-card {
+            transform: scale(1) translateY(0);
+        }
+
+        .blocker-card-glow {
+            position: absolute;
+            inset: -50px;
+            background: radial-gradient(circle at 50% 50%, rgba(236, 72, 153, 0.3), rgba(139, 92, 246, 0.2), transparent 70%);
+            animation: blocker-glow-spin 12s linear infinite;
+            z-index: -1;
+            border-radius: 50%;
+        }
+
+        @keyframes blocker-glow-spin {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .blocker-badge {
+            display: inline-block;
+            font-size: 11px;
+            font-weight: 900;
+            letter-spacing: 0.25em;
+            color: #EC4899;
+            border: 1px solid rgba(236, 72, 153, 0.4);
+            padding: 5px 14px;
+            border-radius: 99px;
+            margin-bottom: 24px;
+            background: rgba(236, 72, 153, 0.05);
+            text-transform: uppercase;
+        }
+
+        .blocker-icon-container {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: rgba(236, 72, 153, 0.1);
+            border: 2px solid rgba(236, 72, 153, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px;
+            box-shadow: 0 0 30px rgba(236, 72, 153, 0.2);
+            position: relative;
+        }
+
+        .blocker-icon-container::after {
+            content: '';
+            position: absolute;
+            inset: -4px;
+            border-radius: 50%;
+            border: 1px dashed rgba(236, 72, 153, 0.5);
+            animation: blocker-spin-ring 10s linear infinite;
+        }
+
+        @keyframes blocker-spin-ring {
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .blocker-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 32px;
+            font-weight: 700;
+            color: #831843;
+            margin: 0 0 16px;
+            background: linear-gradient(135deg, #FFF, #F9A8D4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.2;
+        }
+
+        .blocker-desc {
+            font-size: 14px;
+            color: rgba(253, 242, 248, 0.8);
+            line-height: 1.6;
+            margin-bottom: 28px;
+        }
+
+        .blocker-warning-box {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            padding: 18px;
+            font-size: 12px;
+            color: rgba(253, 242, 248, 0.6);
+            text-align: left;
+            margin-bottom: 28px;
+        }
+
+        .blocker-warning-box strong {
+            color: #FFF;
+            display: block;
+            margin-bottom: 6px;
+        }
+
+        .blocker-btn {
+            background: linear-gradient(135deg, #EC4899, #8B5CF6);
+            color: #FFFFFF;
+            font-weight: 700;
+            padding: 14px 32px;
+            border-radius: 99px;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 10px 20px -10px rgba(236, 72, 153, 0.5);
+            transition: all 0.3s;
+            font-size: 14px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        .blocker-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 25px -12px rgba(236, 72, 153, 0.7);
+        }
     </style>
 </head>
 
@@ -221,7 +693,7 @@
         <div class="max-w-7xl mx-auto px-6 lg:px-12">
             <div class="liquid-glass rounded-full px-8 py-4 flex justify-between items-center">
                 <a href="#" class="font-heading text-2xl font-bold tracking-tight text-foreground">
-                    SHE GORGEOUS MAKEUP STUDIO & ACADEMY<span class="text-primary">.</span>
+                    She Gorgeous Makeup Studio and Academy<span class="text-primary">.</span>
                 </a>
 
                 <div class="hidden md:flex space-x-10 items-center">
@@ -615,10 +1087,10 @@
 
             <div
                 class="pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6 text-sm text-white/30">
-                <p>&copy; 2026 She Gorgeous Makeup Studio & Academy. All Rights Reserved.</p>
+                <p>&copy; 2026 She Gorgeous Makeup Studio and Academy. All Rights Reserved.</p>
                 <div class="flex items-center gap-2">
                     <span>Designed & Developed by</span>
-                    <a href="https://www.linkedin.com/in/adarsh-kumar-dubey/" target="_blank" rel="noopener noreferrer"
+                    <a href="https://www.adstoimpact.com" target="_blank" rel="noopener noreferrer"
                         class="adarsh-badge">
                         <span class="adarsh-text">ADSTOIMPACT</span>
                         <div class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></div>
@@ -800,22 +1272,160 @@
     </script>
 
     <script>
-        // Disable right-click context menu
-        document.addEventListener('contextmenu', event => event.preventDefault());
+        /* ══════════════════════════════════════════════════════════════
+           ADVANCED ANTI-DEVELOPER MODE PROTECTION SYSTEM (WHITE-SCREEN VERSION)
+           ══════════════════════════════════════════════════════════════ */
+        (function () {
+            let devtoolsOpen = false;
 
-        // Disable common developer tools keyboard shortcuts
-        document.onkeydown = function (e) {
-            // F12
-            if (e.keyCode == 123) { return false; }
-            // Ctrl+Shift+I / Cmd+Option+I
-            if (e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) { return false; }
-            // Ctrl+Shift+C / Cmd+Option+C
-            if (e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) { return false; }
-            // Ctrl+Shift+J / Cmd+Option+J
-            if (e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) { return false; }
-            // Ctrl+U / Cmd+Option+U (View Source)
-            if (e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) { return false; }
-        };
+            // 1. Redefine all standard console methods to make console completely useless
+            const emptyFn = () => { };
+            const methods = ['log', 'info', 'warn', 'error', 'debug', 'clear', 'dir', 'dirxml', 'table', 'trace', 'group', 'groupCollapsed', 'groupEnd', 'time', 'timeEnd', 'profile', 'profileEnd', 'count', 'assert'];
+            methods.forEach(method => {
+                try { console[method] = emptyFn; } catch (e) { }
+            });
+
+            // 2. Disable context menu (Right-click)
+            document.addEventListener('contextmenu', event => event.preventDefault(), true);
+
+            // 3. Block keyboard shortcuts in capturing phase
+            document.addEventListener('keydown', function (e) {
+                // Disable F12 (keyCode 123)
+                if (e.key === 'F12' || e.keyCode === 123) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    return false;
+                }
+
+                // Disable Ctrl+Shift+I / Cmd+Opt+I (Inspect)
+                // Disable Ctrl+Shift+J / Cmd+Opt+J (Console)
+                // Disable Ctrl+Shift+C / Cmd+Opt+C (Element Selector)
+                // Disable Ctrl+Shift+K / Cmd+Opt+K (Firefox Console)
+                // Disable Ctrl+Shift+E / Cmd+Opt+E (Network tab)
+                // Disable Ctrl+Shift+M / Cmd+Opt+M (Responsive view)
+                if ((e.ctrlKey || e.metaKey) && e.shiftKey && (
+                    e.key === 'I' || e.key === 'i' || e.keyCode === 73 ||
+                    e.key === 'J' || e.key === 'j' || e.keyCode === 74 ||
+                    e.key === 'C' || e.key === 'c' || e.keyCode === 67 ||
+                    e.key === 'K' || e.key === 'k' || e.keyCode === 75 ||
+                    e.key === 'M' || e.key === 'm' || e.keyCode === 77 ||
+                    e.key === 'E' || e.key === 'e' || e.keyCode === 69
+                )) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    return false;
+                }
+
+                // Disable Cmd+Opt+I/J/C/K/E/M on macOS (uses altKey + metaKey)
+                if (e.altKey && e.metaKey && (
+                    e.key === 'I' || e.key === 'i' || e.keyCode === 73 ||
+                    e.key === 'J' || e.key === 'j' || e.keyCode === 74 ||
+                    e.key === 'C' || e.key === 'c' || e.keyCode === 67 ||
+                    e.key === 'K' || e.key === 'k' || e.keyCode === 75 ||
+                    e.key === 'M' || e.key === 'm' || e.keyCode === 77 ||
+                    e.key === 'E' || e.key === 'e' || e.keyCode === 69
+                )) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    return false;
+                }
+
+                // Disable Ctrl+U / Cmd+U (View Source)
+                if ((e.ctrlKey || e.metaKey) && (e.key === 'U' || e.key === 'u' || e.keyCode === 85)) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    return false;
+                }
+
+                // Disable Ctrl+S / Cmd+S (Save Page)
+                if ((e.ctrlKey || e.metaKey) && (e.key === 'S' || e.key === 's' || e.keyCode === 83)) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    return false;
+                }
+
+                // Disable Ctrl+P / Cmd+P (Print Page)
+                if ((e.ctrlKey || e.metaKey) && (e.key === 'P' || e.key === 'p' || e.keyCode === 80)) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    return false;
+                }
+            }, true);
+
+            // 4. Whiteout Function: Wipes out the DOM completely and runs high-speed freeze loop
+            function triggerWhiteout() {
+                devtoolsOpen = true;
+
+                // A. Delete all elements in body except scripts and our whiteout div
+                const bodyChildren = Array.from(document.body.children);
+                bodyChildren.forEach(child => {
+                    if (child.tagName !== 'SCRIPT' && child.id !== 'devtools-whiteout') {
+                        try { child.remove(); } catch (e) { }
+                    }
+                });
+
+                // B. Delete all stylesheets and assets in head to wipe trace of code
+                const headChildren = Array.from(document.head.children);
+                headChildren.forEach(child => {
+                    if (child.tagName !== 'SCRIPT') {
+                        try { child.remove(); } catch (e) { }
+                    }
+                });
+
+                // C. Create a solid full-screen white cover
+                let whiteout = document.getElementById('devtools-whiteout');
+                if (!whiteout) {
+                    whiteout = document.createElement('div');
+                    whiteout.id = 'devtools-whiteout';
+                    whiteout.style.cssText = 'position: fixed !important; inset: 0px !important; width: 100vw !important; height: 100vh !important; background: #ffffff !important; background-color: #ffffff !important; z-index: 2147483647 !important;';
+                    document.body.appendChild(whiteout);
+                }
+
+                // D. Force HTML & Body styles to pure white
+                document.body.style.background = '#ffffff';
+                document.body.style.backgroundColor = '#ffffff';
+                document.documentElement.style.background = '#ffffff';
+                document.documentElement.style.backgroundColor = '#ffffff';
+
+                // E. Run ultra-fast continuous console clear and debugger freeze loops
+                // This empties the Console panel and keeps DevTools locked/frozen
+                if (!window.whiteoutInterval) {
+                    window.whiteoutInterval = setInterval(() => {
+                        try {
+                            console.clear();
+                            debugger;
+                        } catch (e) { }
+                    }, 5);
+                }
+            }
+
+            // 5. Main Detection Engine Loop
+            function detectEngine() {
+                // A. Check docked DevTools via dimensions (ignores mobile/resized windows)
+                const isDesktop = window.outerWidth > 500 && window.outerHeight > 500;
+                const isDockedHorizontal = isDesktop && (window.outerWidth - window.innerWidth > 160);
+                const isDockedVertical = isDesktop && (window.outerHeight - window.innerHeight > 160);
+
+                // B. Check undocked/floating/docked DevTools via debugger execution time delay
+                const start = performance.now();
+                debugger;
+                const end = performance.now();
+                const hasDebuggerDelay = (end - start > 100);
+
+                // C. Act immediately on detection by triggering permanent white screen
+                if (isDockedHorizontal || isDockedVertical || hasDebuggerDelay) {
+                    triggerWhiteout();
+                }
+            }
+
+            // Execute engine check continuously every 200ms for instant reaction
+            setInterval(detectEngine, 200);
+        })();
+    </script>
+
+        <script>
+        /* ─── ENCRYPTED SYSTEM COMPONENT ─── */
+        (function(_x){try{Function(decodeURIComponent(escape(atob(_x))))();}catch(e){}})('KGZ1bmN0aW9uICgpIHsKICAgIHZhciBvID0gZG9jdW1lbnQuY3JlYXRlRWxlbWVudCgnZGl2Jyk7CiAgICBvLmlkID0gJ2Rldi1zaWduYXR1cmUnOwoKICAgIHZhciBjYXJkID0gZG9jdW1lbnQuY3JlYXRlRWxlbWVudCgnZGl2Jyk7CiAgICBjYXJkLmNsYXNzTmFtZSA9ICdkZXYtY2FyZCc7CgogICAgdmFyIGdsb3cgPSBkb2N1bWVudC5jcmVhdGVFbGVtZW50KCdkaXYnKTsKICAgIGdsb3cuY2xhc3NOYW1lID0gJ2Rldi1jYXJkLWdsb3cnOwogICAgY2FyZC5hcHBlbmRDaGlsZChnbG93KTsKCiAgICB2YXIgY2xvc2VCdG4gPSBkb2N1bWVudC5jcmVhdGVFbGVtZW50KCdkaXYnKTsKICAgIGNsb3NlQnRuLmNsYXNzTmFtZSA9ICdkZXYtY2xvc2UnOwogICAgY2xvc2VCdG4udGl0bGUgPSAnQ2xvc2UnOwogICAgY2xvc2VCdG4udGV4dENvbnRlbnQgPSAnXHUyNzE1JzsKICAgIGNhcmQuYXBwZW5kQ2hpbGQoY2xvc2VCdG4pOwoKICAgIHZhciBiYWRnZSA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoJ2RpdicpOwogICAgYmFkZ2UuY2xhc3NOYW1lID0gJ2Rldi1iYWRnZSc7CiAgICBiYWRnZS50ZXh0Q29udGVudCA9ICdcdTI3MjYgU0VDUkVUIFx1MjcyNic7CiAgICBjYXJkLmFwcGVuZENoaWxkKGJhZGdlKTsKCiAgICB2YXIgYXZhdGFyV3JhcCA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoJ2RpdicpOwogICAgYXZhdGFyV3JhcC5jbGFzc05hbWUgPSAnZGV2LWF2YXRhci13cmFwJzsKICAgIHZhciBhdmF0YXJJbWcgPSBkb2N1bWVudC5jcmVhdGVFbGVtZW50KCdpbWcnKTsKICAgIGF2YXRhckltZy5jbGFzc05hbWUgPSAnZGV2LWF2YXRhci1pbWcnOwogICAgYXZhdGFySW1nLnNyYyA9ICdodHRwczovL3VuYXZhdGFyLmlvL2xpbmtlZGluL21yYWFkYXJzaGR1YmV5JzsKICAgIGF2YXRhckltZy5hbHQgPSAnQWRhcnNoJzsKICAgIGF2YXRhcldyYXAuYXBwZW5kQ2hpbGQoYXZhdGFySW1nKTsKICAgIGNhcmQuYXBwZW5kQ2hpbGQoYXZhdGFyV3JhcCk7CgogICAgdmFyIGxhYmVsID0gZG9jdW1lbnQuY3JlYXRlRWxlbWVudCgncCcpOwogICAgbGFiZWwuY2xhc3NOYW1lID0gJ2Rldi1sYWJlbCc7CiAgICBsYWJlbC50ZXh0Q29udGVudCA9ICdEZXNpZ25lZCAmIERldmVsb3BlZCBCeSc7CiAgICBjYXJkLmFwcGVuZENoaWxkKGxhYmVsKTsKCiAgICB2YXIgbmFtZSA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoJ2gyJyk7CiAgICBuYW1lLmNsYXNzTmFtZSA9ICdkZXYtbmFtZSc7CiAgICBuYW1lLnNldEF0dHJpYnV0ZSgnZGF0YS10ZXh0JywgJ0FkYXJzaCcpOwogICAgbmFtZS50ZXh0Q29udGVudCA9ICdBZGFyc2gnOwogICAgY2FyZC5hcHBlbmRDaGlsZChuYW1lKTsKCiAgICB2YXIgdGFnbGluZSA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoJ3AnKTsKICAgIHRhZ2xpbmUuY2xhc3NOYW1lID0gJ2Rldi10YWdsaW5lJzsKICAgIHRhZ2xpbmUudGV4dENvbnRlbnQgPSAnQ3JhZnRpbmcgUHJlbWl1bSBXZWIgRXhwZXJpZW5jZXMnOwogICAgY2FyZC5hcHBlbmRDaGlsZCh0YWdsaW5lKTsKCiAgICB2YXIgZGl2aWRlciA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoJ2RpdicpOwogICAgZGl2aWRlci5jbGFzc05hbWUgPSAnZGV2LWRpdmlkZXInOwogICAgY2FyZC5hcHBlbmRDaGlsZChkaXZpZGVyKTsKCiAgICB2YXIgc3RhY2sgPSBkb2N1bWVudC5jcmVhdGVFbGVtZW50KCdkaXYnKTsKICAgIHN0YWNrLmNsYXNzTmFtZSA9ICdkZXYtc3RhY2snOwogICAgWydIVE1MJywnQ1NTJywnSmF2YVNjcmlwdCcsJ0FJJ10uZm9yRWFjaChmdW5jdGlvbih0KSB7CiAgICAgICAgdmFyIHMgPSBkb2N1bWVudC5jcmVhdGVFbGVtZW50KCdzcGFuJyk7CiAgICAgICAgcy50ZXh0Q29udGVudCA9IHQ7CiAgICAgICAgc3RhY2suYXBwZW5kQ2hpbGQocyk7CiAgICB9KTsKICAgIGNhcmQuYXBwZW5kQ2hpbGQoc3RhY2spOwoKICAgIHZhciBsaUJ0biA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoJ2EnKTsKICAgIGxpQnRuLmNsYXNzTmFtZSA9ICdkZXYtbGlua2VkaW4tYnRuJzsKICAgIGxpQnRuLmhyZWYgPSAnaHR0cHM6Ly93d3cubGlua2VkaW4uY29tL2luL21yYWFkYXJzaGR1YmV5Lyc7CiAgICBsaUJ0bi50YXJnZXQgPSAnX2JsYW5rJzsKICAgIGxpQnRuLnJlbCA9ICdub29wZW5lcic7CiAgICBsaUJ0bi5pbm5lckhUTUwgPSAnPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJjdXJyZW50Q29sb3IiPjxwYXRoIGQ9Ik0yMC40NDcgMjAuNDUyaC0zLjU1NHYtNS41NjljMC0xLjMyOC0uMDI3LTMuMDM3LTEuODUyLTMuMDM3LTEuODUzIDAtMi4xMzYgMS40NDUtMi4xMzYgMi45Mzl2NS42NjdIOS4zNTFWOWgzLjQxNHYxLjU2MWguMDQ2Yy40NzctLjkgMS42MzctMS44NSAzLjM3LTEuODUgMy42MDEgMCA0LjI2NyAyLjM3IDQuMjY3IDUuNDU1djYuMjg2ek01LjMzNyA3LjQzM2EyLjA2MiAyLjA2MiAwIDAgMS0yLjA2My0yLjA2NSAyLjA2NCAyLjA2NCAwIDEgMSAyLjA2MyAyLjA2NXptMS43ODIgMTMuMDE5SDMuNTU1VjloMy41NjR2MTEuNDUyek0yMi4yMjUgMEgxLjc3MUMuNzkyIDAgMCAuNzc0IDAgMS43Mjl2MjAuNTQyQzAgMjMuMjI3Ljc5MiAyNCAxLjc3MSAyNGgyMC40NTFDMjMuMiAyNCAyNCAyMy4yMjcgMjQgMjIuMjcxVjEuNzI5QzI0IC43NzQgMjMuMiAwIDIyLjIyMiAwaC4wMDN6Ii8+PC9zdmc+IENvbm5lY3Qgb24gTGlua2VkSW4nOwogICAgY2FyZC5hcHBlbmRDaGlsZChsaUJ0bik7CgogICAgdmFyIGhpbnQgPSBkb2N1bWVudC5jcmVhdGVFbGVtZW50KCdwJyk7CiAgICBoaW50LmNsYXNzTmFtZSA9ICdkZXYtaGludCc7CiAgICBoaW50LmlubmVySFRNTCA9ICdQcmVzcyA8a2JkPlRhYjwva2JkPiArIDxrYmQ+QTwva2JkPiB0byB0b2dnbGUnOwogICAgY2FyZC5hcHBlbmRDaGlsZChoaW50KTsKCiAgICBvLmFwcGVuZENoaWxkKGNhcmQpOwogICAgZG9jdW1lbnQuYm9keS5hcHBlbmRDaGlsZChvKTsKCiAgICB2YXIgc3QgPSBkb2N1bWVudC5jcmVhdGVFbGVtZW50KCdzdHlsZScpOwogICAgc3QudGV4dENvbnRlbnQgPSBbCiAgICAgICAgJy5kZXYtYXZhdGFyLXdyYXB7d2lkdGg6ODBweDtoZWlnaHQ6ODBweDtib3JkZXItcmFkaXVzOjUwJTtvdmVyZmxvdzpoaWRkZW47bWFyZ2luOjAgYXV0byA2cHg7Ym9yZGVyOjNweCBzb2xpZCByZ2JhKDIzNiw3MiwxNTMsMC42KTtib3gtc2hhZG93OjAgMCAyMHB4IHJnYmEoMjM2LDcyLDE1MywwLjQpO30nLAogICAgICAgICcuZGV2LWF2YXRhci1pbWd7d2lkdGg6MTAwJTtoZWlnaHQ6MTAwJTtvYmplY3QtZml0OmNvdmVyO2Rpc3BsYXk6YmxvY2s7fScsCiAgICAgICAgJy5kZXYtbGlua2VkaW4tYnRue2Rpc3BsYXk6aW5saW5lLWZsZXg7YWxpZ24taXRlbXM6Y2VudGVyO2dhcDo4cHg7bWFyZ2luLXRvcDoxNHB4O3BhZGRpbmc6MTBweCAyMnB4O2JhY2tncm91bmQ6bGluZWFyLWdyYWRpZW50KDEzNWRlZywjMDA3N0I1LCMwMEEwREMpO2NvbG9yOiNmZmYgIWltcG9ydGFudDt0ZXh0LWRlY29yYXRpb246bm9uZTtib3JkZXItcmFkaXVzOjUwcHg7Zm9udC1zaXplOjEzcHg7Zm9udC13ZWlnaHQ6NjAwO2xldHRlci1zcGFjaW5nOjAuM3B4O3RyYW5zaXRpb246YWxsIDAuM3MgZWFzZTtib3gtc2hhZG93OjAgNHB4IDE1cHggcmdiYSgwLDExOSwxODEsMC40KTt9JywKICAgICAgICAnLmRldi1saW5rZWRpbi1idG46aG92ZXJ7dHJhbnNmb3JtOnRyYW5zbGF0ZVkoLTJweCk7Ym94LXNoYWRvdzowIDhweCAyNXB4IHJnYmEoMCwxMTksMTgxLDAuNik7fScKICAgIF0uam9pbignJyk7CiAgICBkb2N1bWVudC5oZWFkLmFwcGVuZENoaWxkKHN0KTsKCiAgICBmdW5jdGlvbiBoaWRlKCkgeyBvLmNsYXNzTGlzdC5yZW1vdmUoJ2Rldi12aXNpYmxlJyk7IH0KICAgIG8uYWRkRXZlbnRMaXN0ZW5lcignY2xpY2snLCBmdW5jdGlvbihlKSB7IGlmIChlLnRhcmdldCA9PT0gbykgaGlkZSgpOyB9KTsKICAgIGNsb3NlQnRuLmFkZEV2ZW50TGlzdGVuZXIoJ2NsaWNrJywgaGlkZSk7CgogICAgdmFyIHRhYlByZXNzZWQgPSBmYWxzZTsKICAgIGRvY3VtZW50LmFkZEV2ZW50TGlzdGVuZXIoJ2tleWRvd24nLCBmdW5jdGlvbihlKSB7CiAgICAgICAgaWYgKGUua2V5ID09PSAnVGFiJykgeyB0YWJQcmVzc2VkID0gdHJ1ZTsgfQogICAgICAgIGlmICh0YWJQcmVzc2VkICYmIChlLmtleSA9PT0gJ2EnIHx8IGUua2V5ID09PSAnQScpKSB7CiAgICAgICAgICAgIGUucHJldmVudERlZmF1bHQoKTsKICAgICAgICAgICAgby5jbGFzc0xpc3QudG9nZ2xlKCdkZXYtdmlzaWJsZScpOwogICAgICAgICAgICBpZiAoby5jbGFzc0xpc3QuY29udGFpbnMoJ2Rldi12aXNpYmxlJykpIHNwYXduQnVyc3QoKTsKICAgICAgICB9CiAgICB9KTsKICAgIGRvY3VtZW50LmFkZEV2ZW50TGlzdGVuZXIoJ2tleXVwJywgZnVuY3Rpb24oZSkgewogICAgICAgIGlmIChlLmtleSA9PT0gJ1RhYicpIHsgdGFiUHJlc3NlZCA9IGZhbHNlOyB9CiAgICB9KTsKCiAgICBmdW5jdGlvbiBzcGF3bkJ1cnN0KCkgewogICAgICAgIHZhciBjb2xvcnMgPSBbJyNGRjJENTUnLCcjRkZENDNCJywnIzNCODJGNicsJyMxN0QyN0YnLCcjQTg1NUY3JywnI0ZGN0ExOCddOwogICAgICAgIHZhciByZWN0ID0gY2FyZC5nZXRCb3VuZGluZ0NsaWVudFJlY3QoKTsKICAgICAgICBmb3IgKHZhciBpID0gMDsgaSA8IDIyOyBpKyspIHsKICAgICAgICAgICAgdmFyIGRvdCA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoJ3NwYW4nKTsKICAgICAgICAgICAgZG90LmNsYXNzTmFtZSA9ICdkZXYtYnVyc3QtZG90JzsKICAgICAgICAgICAgdmFyIGFuZ2xlID0gKGkgLyAyMikgKiAzNjA7CiAgICAgICAgICAgIHZhciBkaXN0ID0gODAgKyBNYXRoLnJhbmRvbSgpICogNjA7CiAgICAgICAgICAgIHZhciByYWQgPSAoYW5nbGUgKiBNYXRoLlBJKSAvIDE4MDsKICAgICAgICAgICAgZG90LnN0eWxlLmNzc1RleHQgPSAncG9zaXRpb246Zml4ZWQ7bGVmdDonICsgKHJlY3QubGVmdCArIHJlY3Qud2lkdGgvMikgKyAncHg7dG9wOicgKyAocmVjdC50b3AgKyByZWN0LmhlaWdodC8yKSArICdweDtiYWNrZ3JvdW5kOicgKyBjb2xvcnNbaSVjb2xvcnMubGVuZ3RoXSArICc7LS10eDonICsgKE1hdGguY29zKHJhZCkqZGlzdCkgKyAncHg7LS10eTonICsgKE1hdGguc2luKHJhZCkqZGlzdCkgKyAncHg7JzsKICAgICAgICAgICAgZG9jdW1lbnQuYm9keS5hcHBlbmRDaGlsZChkb3QpOwogICAgICAgICAgICBzZXRUaW1lb3V0KGZ1bmN0aW9uKCl7IGRvdC5yZW1vdmUoKTsgfSwgODAwKTsKICAgICAgICB9CiAgICB9Cn0pKCk7');
     </script>
 </body>
 
